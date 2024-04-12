@@ -16,6 +16,17 @@ func init() {
   rand.Seed(time.Now().UnixNano())
 }
 
+func (g *Game) init() {
+  g.x16 = 0
+  g.y16 = 100 * 16
+  g.cameraX = -240
+  g.cameraY = 0
+  g.pipeTileYs = make([]int, 256)
+  for i := range g.pipeTileYs {
+    g.pipeTileYs[i] = rand.Intn(6) + 2
+  }
+}
+
 // init images
 func init() {
   gopherImage = ebiten.NewImageFromImage(assets.PlayerSprite)

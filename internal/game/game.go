@@ -3,11 +3,9 @@ package game
 import (
   "fmt"
   "image/color"
-  "math/rand"
 
   "github.com/hajimehoshi/ebiten/v2"
   "github.com/hajimehoshi/ebiten/v2/ebitenutil"
-  "github.com/wiliamvj/flappy-go/assets"
 
   "github.com/hajimehoshi/ebiten/v2/inpututil"
   "github.com/hajimehoshi/ebiten/v2/text/v2"
@@ -47,17 +45,6 @@ func NewGame(c bool) ebiten.Game {
     return &GameWithCRTEffect{Game: g}
   }
   return g
-}
-
-func (g *Game) init() {
-  g.x16 = 0
-  g.y16 = 100 * 16
-  g.cameraX = -240
-  g.cameraY = 0
-  g.pipeTileYs = make([]int, 256)
-  for i := range g.pipeTileYs {
-    g.pipeTileYs[i] = rand.Intn(6) + 2
-  }
 }
 
 func (g *Game) isKeyJustPressed() bool {
@@ -134,7 +121,6 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-  backgroundImage := ebiten.NewImageFromImage(assets.BackgroundSprite)
   screenWidthDraw, screenHeightDraw := screen.Bounds().Max.X, screen.Bounds().Max.Y
   for y := 0; y < screenHeightDraw; y += backgroundImage.Bounds().Dy() {
     for x := 0; x < screenWidthDraw; x += backgroundImage.Bounds().Dx() {
@@ -211,8 +197,8 @@ func (g *Game) hit() bool {
     return false
   }
   const (
-    gopherWidth  = 30
-    gopherHeight = 60
+    gopherWidth  = 20
+    gopherHeight = 30
   )
   w, h := gopherImage.Bounds().Dx(), gopherImage.Bounds().Dy()
   x0 := floorDiv(g.x16, 16) + (w-gopherWidth)/2
