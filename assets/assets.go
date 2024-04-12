@@ -14,6 +14,8 @@ import (
 var assets embed.FS
 
 var PlayerSprite = mustLoadImage("sprites/bluebird-downflap.png")
+var TilesSprite = mustLoadImage("sprites/tiles.png")
+var BackgroundSprite = mustLoadImage("sprites/background-day.png")
 
 func mustLoadImage(path string) *ebiten.Image {
   f, err := assets.Open(path)
